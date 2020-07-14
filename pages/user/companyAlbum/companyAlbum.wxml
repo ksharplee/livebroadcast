@@ -1,0 +1,27 @@
+<!--pages/user/companyAlbum/companyAlbum.wxml-->
+<view class="footer large">
+  <van-button
+    type="primary"
+    square
+    block
+    size="large"
+    loading="{{submitting}}"
+    bind:click="onSubmit"
+  >提交</van-button>
+</view>
+<view
+  class="content pt-3"
+  style="padding-bottom:{{device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 50}}px"
+>
+  <view style="padding-left:15px">
+    <van-uploader
+      file-list="{{files}}"
+      max-size="4000000"
+      preview-size="{{imgWidth}}px"
+      upload-icon="plus"
+      bind:delete="deleteImg"
+      bind:oversize="oversize"
+      bind:after-read="afterRead"
+    />
+  </view>
+</view>

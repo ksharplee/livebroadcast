@@ -1,0 +1,87 @@
+<!-- pages/user/anchor/anchor.wxml -->
+<view wx:if="{{addable}}" class="footer large">
+  <van-button
+    type="primary"
+    square
+    block
+    size="large"
+    bind:click="navigateTo"
+  >添加主播</van-button>
+</view>
+<view
+  class="content"
+  style="padding-bottom:{{addable ? device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 50 : 0}}px"
+>
+  <!-- <view class="p-3 text-center">
+    <van-row gutter="10">
+      <van-col wx:for="{{ 20 }}" wx:key="index" span="6" custom-class="mb-4">
+        <view class="img-container full mb-2 rounded-circle overflow-hidden">
+          <view class="box">
+            <image src="/images/img-zhubo.png" />
+          </view>
+        </view>
+        <view class="mb-1">曹德</view>
+        <view class="text-primary small mb-2">粉丝：12万</view>
+        <view class="btn-icon" hover-class="navigator-hover">
+          <van-icon name="edit" color="#fff" size="16px" />
+        </view>
+      </van-col>
+    </van-row>
+  </view>-->
+  <view class="p-2">
+    <van-row gutter="5">
+      <van-col
+        wx:for="{{anchors.data}}"
+        wx:key="index"
+        span="12"
+        custom-class="mb-2"
+      >
+        <!-- <view
+          style="position:absolute;right:5px;top:5px;z-index:1;width:20px;height:20px"
+          class="bg-white rounded-circle"
+        >
+          <van-icon
+            name="clear"
+            color="#999"
+            size="20px"
+            data-index="{{index}}"
+            bind:click="removeAnchor"
+          />
+        </view> -->
+        <!-- 有id表示是公司旗下网红，不允许修改 -->
+        <navigator
+          class="bg-white rounded"
+          url="/pages/anchor/detail/detail?id={{item.id}}&&sellerId={{item.sellerId}}&&edit={{id ? 0 : 1}}"
+        >
+          <van-image
+            lazy-load
+            src="{{item.logo}}?x-oss-process=image/resize,m_lfit,w_375,h_375"
+            width="{{imgWidth}}"
+            height="{{imgWidth}}"
+            use-loading-slot
+          >
+            <van-loading
+              slot="loading"
+              type="spinner"
+              size="20"
+              vertical
+            />
+          </van-image>
+          <view class="p-2">
+            <view
+              class="text-truncate mb-2 font-weight-bold"
+            >{{item.nickName ? item.nickName : item.dnames}}</view>
+            <view class="text-truncate small mb-1">粉丝数量：{{item.fanCount ? item.fanCount : '0'}}</view>
+          </view>
+        </navigator>
+      </van-col>
+    </van-row>
+    <view class="text-center text-muted py-2">
+      <van-loading
+        wx:if="{{anchors.data.isMore || loading}}"
+        size="24px"
+      >加载中...</van-loading>
+      <view wx:else>没有更多了</view>
+    </view>
+  </view>
+</view>

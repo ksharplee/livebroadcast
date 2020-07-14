@@ -1,0 +1,165 @@
+<!--pages/user/index/index.wxml-->
+<view
+  wx:if="{{edit}}"
+  class="footer large"
+>
+  <van-row>
+    <van-col span="12">
+      <van-button
+        type="primary"
+        square
+        block
+        size="large"
+        bind:click="onEditAnchor"
+      >编辑</van-button>
+    </van-col>
+    <van-col span="12">
+      <van-button
+        type="default"
+        square
+        block
+        size="large"
+        bind:click="onDeleteAnchor"
+      >删除</van-button>
+    </van-col>
+  </van-row>
+</view>
+<view
+  class="content"
+  style="padding-bottom:{{edit ? device.needFix ? device.safeArea.bottom - device.safeArea.height + 40 : 50 : 0}}px"
+>
+  <view class="user-header-bg position-relative">
+    <image
+      src="/images/img-user-header-bg-single.jpg"
+      class="shadow"
+      style="width:{{device.windowWidth}}px;height:{{device.windowWidth*0.42}}px"
+    />
+    <view class="content-area flex-column justify-content-center text-center text-white">
+      <view class="img-container small mx-auto mb-2">
+        <view class="box rounded-circle">
+          <image src="{{logo}}" />
+        </view>
+        <!-- <view
+          class="position-absolute"
+          style="z-index:1;right:-10px;bottom:0"
+        >
+          <van-tag
+            round
+            type="success"
+            size="small"
+            custom-class="px-2 ml-2"
+          >已审核</van-tag>
+        </view>-->
+      </view>
+      <view class="mb-2 h4">{{nickName ? nickName : dnames}}</view>
+      <!-- <van-button
+        type="danger"
+        size="small"
+        round
+      >
+        <view class="d-flex align-items-cente">
+          去审核
+          <van-icon
+            name="arrow"
+            size="14px"
+            color="#fff"
+          ></van-icon>
+        </view>
+      </van-button>-->
+    </view>
+  </view>
+  <view
+    class="rounded overflow-hidden mx-3 bg-white mb-3 position-relative"
+    style="margin-top:-40px;z-index:1"
+  >
+    <van-cell
+      url="{{edit ? '/pages/user/companyAlbum/companyAlbum?isPersonal=1' : '/pages/anchor/album/album?isPersonal=1'}}"
+      title="相册"
+      is-link
+    />
+    <view
+      wx:if="{{albumAvailable.length}}"
+      class="px-3 pt-2 pb-1"
+    >
+      <van-row gutter="10">
+        <van-col
+          wx:for="{{albumAvailable}}"
+          wx:key="index"
+          span="6"
+        >
+          <van-image
+            src="{{item.image}}"
+            width="{{imgWidth}}px"
+            height="{{imgWidth}}px"
+            use-loading-slot
+          >
+            <van-loading
+              slot="loading"
+              type="spinner"
+              size="20"
+              vertical
+            />
+          </van-image>
+        </van-col>
+      </van-row>
+    </view>
+    <view
+      wx:if="{{!albumAvailable.length && !loading}}"
+      class="text-muted text-center py-2"
+    >暂无图片</view>
+  </view>
+  <view class="m-3 rounded overflow-hidden">
+    <van-cell-group>
+      <van-cell
+        title="直播的产品类目"
+        value="{{category}}"
+      />
+      <van-cell
+        url="/pages/anchor/goods/goods"
+        title="我直播过的产品"
+        is-link
+      />
+      <van-cell
+        url="/pages/anchor/detailDesc/detailDesc"
+        title="个人简介"
+        title-class="flex-none mr-auto"
+        is-link
+        value="{{detailDescShow}}"
+      />
+    </van-cell-group>
+  </view>
+  <van-row
+    gutter="20"
+    custom-class="mx-3 py-2 text-center"
+  >
+    <van-col span="12">直播平台</van-col>
+    <van-col span="12">粉丝数量</van-col>
+  </van-row>
+  <van-row
+    wx:for="{{platform}}"
+    wx:key="index"
+    gutter="20"
+    custom-class="mx-3 px-3 py-2 bg-white border-bottom text-center text-muted"
+  >
+    <van-col span="12">
+      <input
+        value="{{item.platformName}}"
+        placeholder="请输入直播平台的名称"
+        data-index="{{index}}"
+        bind:input="changePlatformName"
+      />
+    </van-col>
+    <van-col
+      span="12"
+      custom-class="border-left"
+    >
+      <input
+        value="{{item.fanCount}}"
+        placeholder="请输入平台的粉丝数量"
+        data-index="{{index}}"
+        bind:input="changePlatformFan"
+      />
+    </van-col>
+  </van-row>
+</view>
+<van-dialog id="van-dialog" />

@@ -1,0 +1,54 @@
+<!--pages/anchor/companyZhubo/companyZhubo.wxml-->
+<view
+  wx:if="{{addable}}"
+  class="footer large"
+>
+  <van-button
+    type="primary"
+    square
+    block
+    size="large"
+    bind:click="navigateTo"
+  >添加主播</van-button>
+</view>
+<view
+  class="content"
+  style="padding-bottom:{{addable ? device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 50 : 0}}px"
+>
+  <view
+    class="text-center"
+    style="padding:10px"
+  >
+    <van-row gutter="10">
+      <van-col
+        wx:for="{{anchors.data}}"
+        wx:key="index"
+        span="6"
+        custom-class="mb-4"
+      >
+        <navigator url="/pages/anchor/detail/detail?id={{item.id}}&&sellerId={{item.sellerId}}&&edit={{addable ? '1' : '0'}}">
+          <van-image
+            lazy-load
+            src="{{item.logo}}?x-oss-process=image/resize,m_lfit,w_375,h_375"
+            width="{{imgWidth}}"
+            height="{{imgWidth}}"
+            fit="cover"
+            use-loading-slot
+            custom-class="rounded-circle overflow-hidden bg-white mb-1"
+          >
+            <van-loading
+              slot="loading"
+              type="spinner"
+              size="20"
+              vertical
+            />
+          </van-image>
+          <view class="mb-1 text-truncate">{{item.nickName ? item.nickName : item.dnames}}</view>
+          <view
+            class="text-primary text-truncate small mb-2"
+          >粉丝: {{item.fanCount ? item.fanCount : '0'}}</view>
+        </navigator>
+      </van-col>
+    </van-row>
+  </view>
+</view>

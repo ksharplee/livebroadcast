@@ -1,0 +1,251 @@
+<!-- pages/user/companyInfo/companyInfo.wxml -->
+<view class="footer large">
+  <van-button
+    type="primary"
+    square
+    block
+    size="large"
+    loading="{{submitting}}"
+    bind:click="onSubmit"
+  >提交</van-button>
+</view>
+<view
+  class="content"
+  style="padding-bottom:{{device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 50}}px"
+>
+  <van-cell-group custom-class="my-2">
+    <van-field
+      id="mobile"
+      label="手机"
+      value="{{mobile}}"
+      disabled="{{edit}}"
+      input-class="text-right"
+      data-target="mobile"
+      data-name="手机号码"
+      data-rules="required|mobile"
+      error-message="{{mobileErrors[0]}}"
+      error-message-align="right"
+      type="number"
+      required
+      error="{{mobileErrors.length}}"
+      placeholder="请输入手机号"
+      use-button-slot="{{!edit}}"
+      bind:blur="onBlur"
+      bind:input="changeInput"
+    >
+      <van-button
+        wx:if="{{!edit}}"
+        slot="button"
+        disabled="{{disabledCode}}"
+        size="small"
+        type="default"
+        plain
+        custom-class="border-0 text-primary"
+        bind:click="getVerifyCodeLocal"
+      >{{codeText}}</van-button>
+    </van-field>
+    <van-field
+      wx:if="{{!edit}}"
+      id="code"
+      required
+      label="验证码"
+      value="{{code}}"
+      input-class="text-right"
+      data-target="code"
+      data-name="验证码"
+      data-rules="required"
+      placeholder="请输入验证码"
+      error-message="{{codeErrors[0]}}"
+      error-message-align="right"
+      type="number"
+      error="{{codeErrors.length}}"
+      bind:blur="onBlur"
+      bind:input="changeInput"
+    />
+    <van-field
+      id="sellerName"
+      value="{{sellerName}}"
+      disabled="{{edit || disabledCompanyName}}"
+      required
+      label="公司名称"
+      input-class="text-right"
+      data-target="sellerName"
+      data-name="公司名称"
+      data-rules="required"
+      error-message="{{sellerNameErrors[0]}}"
+      error="{{sellerNameErrors.length}}"
+      error-message-align="right"
+      placeholder="请输入公司名称"
+      bind:blur="onBlur"
+      bind:input="changeInput"
+    />
+    <van-field
+      value="{{businessCode}}"
+      data-target="businessCode"
+      label="营业执照号"
+      input-class="text-right"
+      placeholder="请输入营业执照号"
+      bind:input="changeInput"
+    />
+    <van-cell
+      title="营业执照扫描件"
+      custom-class="pb-0"
+      border="{{false}}"
+      center
+    />
+    <view class="p-3 bg-white position-relative">
+      <view
+        class="bg-light rounded"
+        style="width:183px"
+      >
+        <van-icon
+          wx:if="{{businessLicenseImage[0].path}}"
+          name="clear"
+          custom-style="position:absolute;z-index:1;left:173px;top:-10px;padding:15px"
+          color="#999"
+          size="20px"
+          data-target="businessLicenseImage"
+          bind:click="removeImg"
+        />
+        <van-uploader
+          data-target="businessLicenseImage"
+          max-count="1"
+          max-size="4000000"
+          bind:oversize="oversize"
+          bind:after-read="afterRead"
+        >
+          <image
+            src="{{businessLicenseImage[0] ? businessLicenseImage[0].path : '/images/imgWaiting.png'}}"
+            mode="aspectFit"
+            style="width:183px;height:183px"
+          />
+        </van-uploader>
+      </view>
+    </view>
+  </van-cell-group>
+  <van-cell-group custom-class="my-2">
+    <van-field
+      value="{{legalPerson}}"
+      data-target="legalPerson"
+      label="法人姓名"
+      input-class="text-right"
+      placeholder="请输入法人姓名"
+      bind:input="changeInput"
+    />
+    <!-- <van-field
+      value="{{idCode}}"
+      data-target="idCode"
+      label="身份证号码"
+      input-class="text-right"
+      placeholder="请输入身份证号码"
+      bind:input="changeInput"
+    />
+    <van-cell
+      title="身份证正面照"
+      custom-class="pb-0"
+      border="{{false}}"
+      center
+    /> -->
+    <!-- <view class="p-3 bg-white position-relative">
+      <view
+        class="bg-light rounded"
+        style="width:183px"
+      >
+        <van-icon
+          wx:if="{{idFront[0].path}}"
+          name="clear"
+          custom-style="position:absolute;z-index:1;left:173px;top:-10px;padding:15px"
+          color="#999"
+          size="20px"
+          data-target="idFront"
+          bind:click="removeImg"
+        />
+        <van-uploader
+          data-target="idFront"
+          max-count="1"
+          max-size="4000000"
+          bind:oversize="oversize"
+          bind:after-read="afterRead"
+        >
+          <image
+            src="{{idFront[0] ? idFront[0].path : '/images/icon-upload-id-front.jpg'}}"
+            mode="aspectFit"
+            style="width:183px;height:113px"
+          />
+        </van-uploader>
+      </view>
+    </view> -->
+    <!-- <van-cell
+      title="身份证背面照"
+      custom-class="pb-0"
+      border="{{false}}"
+      center
+    />
+    <view class="p-3 bg-white position-relative">
+      <view
+        class="bg-light rounded"
+        style="width:183px"
+      >
+        <van-icon
+          wx:if="{{idBack[0].path}}"
+          name="clear"
+          custom-style="position:absolute;z-index:1;left:173px;top:-10px;padding:15px"
+          color="#999"
+          size="20px"
+          data-target="idBack"
+          bind:click="removeImg"
+        />
+        <van-uploader
+          data-target="idBack"
+          max-count="1"
+          max-size="4000000"
+          bind:oversize="oversize"
+          bind:after-read="afterRead"
+        >
+          <image
+            src="{{idBack[0] ? idBack[0].path : '/images/icon-upload-id-back.jpg'}}"
+            mode="aspectFit"
+            style="width:183px;height:113px"
+          />
+        </van-uploader>
+      </view>
+    </view> -->
+  </van-cell-group>
+  <van-cell-group custom-class="my-2">
+    <van-field
+      value="{{email}}"
+      data-target="email"
+      label="邮箱号"
+      input-class="text-right"
+      placeholder="请输入邮箱号"
+      bind:input="changeInput"
+    />
+  </van-cell-group>
+</view>
+<van-dialog
+  use-slot
+  show="{{ showDialog }}"
+  show-cancel-button
+  confirm-button-color="#4cbaab"
+  bind:cancel="onCancleDialog"
+  bind:confirm="onConfirmDialog"
+>
+  <view class="p-3">
+    <van-field
+      label="验证码"
+      value="{{code}}"
+      data-target="code"
+      data-name="验证码"
+      data-addition="data"
+      data-rules="required"
+      placeholder="请输入验证码"
+      error-message="{{codeErrors[0]}}"
+      custom-style="margin-bottom:10px;text-align:left"
+      type="number"
+      error="{{codeErrors.length}}"
+      bind:blur="onBlur"
+      bind:input="changeInput"
+    />
+    <view class="small px-3 text-muted">您的手机号码已经在义数订货注册，请输入验证码并点击"确定"获取您的信息</view>
+  </view>
+</van-dialog>

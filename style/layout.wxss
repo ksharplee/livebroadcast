@@ -1,0 +1,58 @@
+.header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #4cbaab;
+}
+
+.header~.content {
+  padding-top: 50px;
+}
+
+.content.with-tabbar {
+  padding-bottom: 50px;
+}
+
+.sort-bar {
+  position: fixed;
+  z-index: 9;
+  top: 50px;
+  right: 0;
+  left: 0;
+  height: 50px;
+  overflow: hidden;
+}
+
+.sort-bar~.content {
+  padding-top: 100px;
+}
+
+.sort-bar .van-tabbar-item {
+  position: relative;
+}
+
+.sort-bar .van-tabbar-item--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 4rpx;
+  background-color: #4cbaab;
+}
+
+.footer {
+  position: fixed;
+  z-index: 100;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #eee;
+  background-color: #fff;
+}
+
+.footer~.content {
+  padding-bottom: 88rpx;
+}

@@ -1,0 +1,71 @@
+<!--pages/user/anchorProCate/anchorProCate.wxml-->
+<view class="footer large">
+  <van-button
+    type="primary"
+    square
+    block
+    size="large"
+    loading="{{submitting}}"
+    bind:click="saveCate"
+  >保存</van-button>
+</view>
+<view
+  class="content"
+  style="padding-bottom:{{device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 50}}px"
+>
+  <view class="p-3">
+    <van-button
+      wx:for="{{cate}}"
+      wx:key="index"
+      round
+      type="primary"
+      size="small"
+      custom-class="mb-2 mr-2"
+      data-index="{{index}}"
+      bind:click="removeCate"
+    >
+      <view class="d-flex align-items-center">
+        <view class="mr-2">{{item}}</view>
+        <van-icon
+          name="cross"
+          size="14px"
+          color="#fff"
+        />
+      </view>
+    </van-button>
+    <van-button
+      round
+      type="default"
+      size="small"
+      custom-class="mb-2 text-primary"
+      bind:click="openDialog"
+    >
+      <view class="d-flex align-items-center">
+        <view class="mr-2">添加</view>
+        <van-icon
+          name="plus"
+          size="16px"
+          color="#4cbaab"
+        />
+      </view>
+    </van-button>
+  </view>
+</view>
+<van-dialog
+  use-slot
+  title="添加直播产品类目"
+  show="{{ show }}"
+  confirm-button-color="#4cbaab"
+  show-cancel-button
+  bind:confirm="onConfirm"
+  bind:cancel="onCancel"
+>
+  <view class="p-3">
+    <input
+      value="{{input}}"
+      class="border rounded p-2"
+      placeholder="请输入产品类别"
+      bindinput="changeInput"
+    />
+  </view>
+</van-dialog>

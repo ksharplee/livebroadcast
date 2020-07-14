@@ -1,0 +1,98 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/anchor/list/list",
+    "pages/anchor/company/company",
+    "pages/anchor/album/album",
+    "pages/anchor/companyZhuboDesc/companyZhuboDesc",
+    "pages/anchor/companyZhubo/companyZhubo",
+    "pages/anchor/index/index",
+    "pages/anchor/detail/detail",
+    "pages/anchor/detailDesc/detailDesc",
+    "pages/anchor/goods/goods",
+    "pages/user/index/index",
+    "pages/user/companyInfo/companyInfo",
+    "pages/user/userInfo/userInfo",
+    "pages/user/companyDesc/companyDesc",
+    "pages/user/companyAlbum/companyAlbum",
+    "pages/user/anchor/anchor",
+    "pages/user/anchorAdd/anchorAdd",
+    "pages/user/anchorDesc/anchorDesc",
+    "pages/user/anchorPlatform/anchorPlatform",
+    "pages/user/anchorProCate/anchorProCate",
+    "pages/user/anchorProduct/anchorProduct",
+    "pages/user/anchorProductAdd/anchorProductAdd",
+    "pages/sellerGoods/sellerGoods",
+    "pages/goodsDetail/goodsDetail",
+    "pages/broadCast/broadCast"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "云播货源",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-tree-select": "@vant/weapp/tree-select/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-transition": "@vant/weapp/transition/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": [
+    "wx5efdf9a130d894ad"
+  ],
+  "tabBar": {
+    "custom": false,
+    "color": "#999faa",
+    "selectedColor": "#55b5c1",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icon-tabbar-bag.png",
+        "selectedIconPath": "images/icon-tabbar-bag-active.png",
+        "text": "直播商品"
+      },
+      {
+        "pagePath": "pages/anchor/list/list",
+        "iconPath": "images/icon-tabbar-company.png",
+        "selectedIconPath": "images/icon-tabbar-company-active.png",
+        "text": "直播公司"
+      },
+      {
+        "pagePath": "pages/anchor/index/index",
+        "iconPath": "images/icon-tabbar-wanghong.png",
+        "selectedIconPath": "images/icon-tabbar-wanghong-active.png",
+        "text": "推荐网红"
+      },
+      {
+        "pagePath": "pages/user/index/index",
+        "iconPath": "images/icon-tabbar-live.png",
+        "selectedIconPath": "images/icon-tabbar-live-active.png",
+        "text": "直播入驻"
+      }
+    ]
+  }
+}

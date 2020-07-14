@@ -1,0 +1,54 @@
+<!--pages/user/anchorProduct/anchorProduct.wxml-->
+<!-- wx:if="{{showBtn}}" -->
+<view class="footer large">
+  <van-button
+    type="primary"
+    square
+    block
+    size="large"
+    loading="{{submitting}}"
+    bind:click="saveGoods"
+  >保存</van-button>
+</view>
+<view
+  class="content"
+  style="padding-bottom:{{device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 50}}px"
+>
+  <view style="padding:15px">
+    <van-row gutter="10">
+      <van-col
+        wx:for="{{goods}}"
+        wx:key="index"
+        span="12"
+        custom-class="mb-3"
+      >
+        <view class="bg-white rounded overflow-hidden position-relative">
+          <view style="position:absolute;right:5px;top:5px;z-index:1;width:20px;height:20px" class="bg-white rounded-circle"><van-icon name="clear" color="#999" size="20px" data-index="{{index}}" bind:click="removeProduct" /></view>
+          <van-image
+            src="{{item.goodImage}}"
+            width="{{imgWidth}}"
+            height="{{imgWidth}}"
+            use-loading-slot
+          >
+            <van-loading
+              slot="loading"
+              type="spinner"
+              size="20"
+              vertical
+            />
+          </van-image>
+          <view class="p-2">
+            <view class="text-truncate">{{item.goodName}}</view>
+          </view>
+        </view>
+      </van-col>
+    </van-row>
+    <van-button
+      type="default"
+      round
+      block
+      color="#ff8067"
+      bind:click="navigateTo"
+    >添加产品</van-button>
+  </view>
+</view>

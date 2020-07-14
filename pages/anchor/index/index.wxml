@@ -1,0 +1,99 @@
+<!--pages/anchor/index/index.wxml-->
+<!-- <view style="padding:10px">
+  <van-row gutter="10">
+    <van-col
+      wx:for="{{anchors.data}}"
+      wx:key="index"
+      span="12"
+      custom-class="mb-2"
+    >
+      <navigator
+        class="bg-white rounded overflow-hidden"
+        url="/pages/anchor/detail/detail?id={{item.id}}&&sellerId={{item.sellerId}}"
+      >
+        <van-image
+          lazy-load
+          src="{{item.logo}}?x-oss-process=image/resize,m_lfit,w_375,h_375"
+          width="{{imgWidth}}"
+          height="{{imgWidth}}"
+          fit="contain"
+          use-loading-slot
+        >
+          <van-loading
+            slot="loading"
+            type="spinner"
+            size="20"
+            vertical
+          />
+        </van-image>
+        <view class="p-2">
+          <view
+            class="text-truncate mb-2 font-weight-bold"
+          >{{item.nickName ? item.nickName : item.dnames}}</view>
+          <view class="text-truncate small mb-1">粉丝数量：{{item.fanCount ? item.fanCount : '0'}}</view>
+        </view>
+      </navigator>
+    </van-col>
+  </van-row>
+  <view class="text-center text-muted py-2">
+    <van-loading
+      wx:if="{{anchors.data.isMore || loading}}"
+      size="24px"
+    >加载中...</van-loading>
+    <view wx:else>没有更多了</view>
+  </view>
+</view>-->
+<view class="content">
+  <view
+    class="text-center"
+    style="padding:10px"
+  >
+    <van-row gutter="10">
+      <van-col
+        wx:for="{{anchors.data}}"
+        wx:key="index"
+        span="6"
+        custom-class="mb-4"
+      >
+        <!-- <navigator url="/pages/anchor/companyZhuboDesc/companyZhuboDesc">
+          <view class="img-container full mb-2 rounded-circle overflow-hidden">
+            <view class="box">
+              <image src="/images/img-zhubo.png" />
+            </view>
+          </view>
+          <view class="mb-1">曹德</view>
+          <view class="text-primary small mb-2">粉丝：12万</view>
+        </navigator>-->
+        <navigator url="/pages/anchor/detail/detail?id={{item.id}}&&sellerId={{item.sellerId}}">
+          <van-image
+            lazy-load
+            src="{{item.logo}}?x-oss-process=image/resize,m_lfit,w_375,h_375"
+            width="{{imgWidth}}"
+            height="{{imgWidth}}"
+            fit="cover"
+            use-loading-slot
+            custom-class="rounded-circle overflow-hidden bg-white mb-1"
+          >
+            <van-loading
+              slot="loading"
+              type="spinner"
+              size="20"
+              vertical
+            />
+          </van-image>
+          <view class="mb-1 text-truncate">{{item.nickName ? item.nickName : item.dnames}}</view>
+          <view
+            class="text-primary text-truncate small mb-2"
+          >粉丝: {{item.fanCount ? item.fanCount : '0'}}</view>
+        </navigator>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="text-center text-muted py-2">
+    <van-loading
+      wx:if="{{anchors.data.isMore || loading}}"
+      size="24px"
+    >加载中...</van-loading>
+    <view wx:else>没有更多了</view>
+  </view>
+</view>

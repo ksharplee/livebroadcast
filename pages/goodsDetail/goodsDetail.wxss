@@ -1,0 +1,5 @@
+/* pages/goodsDetail/goodsDetail.wxss */
+
+page {
+  background-color: #f2f5fb;
+}

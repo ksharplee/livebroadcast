@@ -1,0 +1,6 @@
+/* pages/anchor/index/index.wxss */
+
+page {
+  background-color: #f5f5f5;
+  --image-placeholder-background-color: #fff
+}

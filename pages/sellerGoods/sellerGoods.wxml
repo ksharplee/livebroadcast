@@ -1,0 +1,133 @@
+<!--pages/sellerGoods/sellerGoods.wxml-->
+<van-sticky>
+  <view class="d-flex align-items-center justify-content-between bg-primary py-2 px-3 text-white">
+    <view >
+      <view class="h5 mb-1">{{ sellerInfo.dnames }}</view>
+      <view class="">电话：{{ sellerInfo.mobile }}</view>
+    </view>
+    <van-button type="default" round custom-class="text-primary" bind:click="showPopup">联系信息 ></van-button>
+  </view>
+  <view class="d-flex align-items-center bg-white px-3 py-2">
+    <view class="flex-grow-1">
+      <van-search value="{{ searchStr }}" input-class="pl-1" placeholder="请输入商品关键字" shape="round" background="transparent" custom-class="p-0" bind:change="onChange" bind:search="onSearch" bind:cancel="onCancel" bind:clear="getGoodsInfo" clearable></van-search>
+    </view>
+    <van-icon name="{{ display ? 'apps-o' : 'bars' }}" size="24px" color="#4cbaab" custom-style="margin-left:5px;" bind:click="toggleDisplay" />
+  </view>
+  <view class="sort-bar pa-2 position-relative overflow-hidden" style="height:50px">
+    <van-tabbar active="{{ active }}" fixed="{{ false }}" active-color="#4cbaab" inactive-color="#333" bind:change="onChangeTab">
+      <van-tabbar-item>全部</van-tabbar-item>
+      <van-tabbar-item data-index="1" bind:tap="onChangeTabbar">
+        价格
+        <van-icon name="{{ active === 1 ? sortPrice ? '/images/icon-caret-down-active.png' : '/images/icon-caret-up-active.png' :  '/images/icon-caret-down.png'}}" size="10px" />
+      </van-tabbar-item>
+      <van-tabbar-item custom-class="text-uppercase" bind:tap="onChangeTabbar">
+        上传时间
+       <van-icon name="{{ active === 2 ? sortStock ? '/images/icon-caret-down-active.png' : '/images/icon-caret-up-active.png' :  '/images/icon-caret-down.png'}}" size="10px" />
+      </van-tabbar-item>
+    </van-tabbar>
+  </view>
+</van-sticky>
+<!-- <view wx:if="{{goodsInfo.length}}" class="content"> -->
+<!-- <view class="content">
+  <block wx:if="{{ display }}">
+    <view class="media border-bottom p-3  position-relative" wx:for={{ item.goodsInfo }}>
+      <navigator url="/pages/goodsDetail/goodsDetail" class="img-container">
+        <view class="box rounded">
+          <image mode="aspectFill" style="width:100%;height:100%" src="/images/imgWaiting.png"></image>
+        </view>
+      </navigator>
+      <view class="media-body pl-3">
+        <navigator url="/pages/goodsDetail/goodsDetail?id={{ item.id }}">
+          <view class="line-break h6  mb-1">元素胸针女胸花配饰小鹿高档奢华饰品西装别针气质</view>
+          <view class="text-muted mb-1">库存：1000个</view>
+          <view class="text-pink h4 font-weight-bold mb-2">￥338.00</view>
+        </navigator>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="px-1 pt-2">
+      <van-row gutter="10" custom-class="px-2">
+        <van-col span="12">
+          <view class="card">
+            <navigator class="img-container full" url="/pages/goodsDetail/goodsDetail">
+              <view class="box rounded">
+                <image mode="aspectFill" src="/images/imgWaiting.png"></image>
+              </view>
+            </navigator>
+            <view class="card-body bg-product-box position-relative pt-2 pb-3 px-2">
+              <navigator url="/pages/goodsDetail/goodsDetail?id={{ item.id }}">
+                <view class="text-truncate mb-1 h6">元素胸针女胸花配饰小鹿高档奢华饰品西装别针气质</view>
+                <view class="text-muted mb-1">库存：1000个</view>
+                <view class="text-pink  h4 font-weight-bold mb-2">￥338.00</view>
+              </navigator>
+            </view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </block>
+</view> -->
+<view class="content">
+  <block wx:if="{{ display }}">
+    <view class="media border-bottom p-3  position-relative" wx:key="id" wx:for="{{ goodsInfo.item }}">
+      <navigator url="/pages/goodsDetail/goodsDetail?sellerId={{ item.sellerId }}&goodsId={{ item.goodId }}" class="img-container">
+        <view class="box rounded">
+          <image mode="aspectFill" style="width:100%;height:100%" src="{{ item.image ? item.image : '/images/imgWaiting.png' }}"></image>
+        </view>
+      </navigator>
+      <view class="media-body pl-3  align-self-stretch d-flex flex-column">
+        <navigator url="/pages/goodsDetail/goodsDetail?sellerId={{ item.sellerId }}&goodsId={{ item.goodId }}">
+          <view class="line-break h6  mb-1">{{ item.goodName }}</view>
+          <view class="text-muted mb-2">库存：{{ item.stock > 0 ? item.stock : '有货' }}{{item.stock > 0 ? item.unitName :'' }}</view>
+          <view class="text-pink h4 font-weight-bold mb-2">￥{{ item.minPrice }}</view>
+        </navigator>
+        <!-- <navigator  class="mt-auto" hover-class="hover-class" url="/pages/sellerGoods/sellerGoods?sellerId={{ item.sellerId }}">
+          {{ item.sellerName }} >
+        </navigator> -->
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="pt-2" style="padding-right:5px;padding-left:5px">
+      <van-row gutter="10" custom-class="px-2">
+        <van-col span="12" wx:for="{{goodsInfo.item}}" wx:key="id">
+          <view class="card">
+            <navigator class="img-container full" url="/pages/goodsDetail/goodsDetail?sellerId={{ item.sellerId }}&goodsId={{ item.goodId }}">
+              <view class="box rounded">
+                <image mode="aspectFill" src="{{ item.image ? item.image : '/images/imgWaiting.png' }}"></image>
+              </view>
+            </navigator>
+            <view class="card-body bg-product-box position-relative pt-2 pb-3 px-2">
+              <navigator url="/pages/goodsDetail/goodsDetail?sellerId={{ item.sellerId }}&goodsId={{ item.goodId }}">
+                <view class="text-truncate mb-1 h6">{{ item.goodName }}</view>
+                <view class="text-muted mb-2">库存：{{ item.stock > 0 ? item.stock : '有货' }}{{item.stock > 0 ? item.unitName :'' }}</view>
+                <view class="text-pink  h4 font-weight-bold mb-2">￥{{ item.minPrice }}</view>
+              </navigator>
+              <!-- <navigator hover-class="hover-class" url="/pages/sellerGoods/sellerGoods?sellerId={{ item.sellerId }}">
+               {{ item.sellerName }} >
+              </navigator> -->
+            </view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </block>
+    <view class="text-center text-muted pt-3" wx:if="{{!loading && !goodsInfo.item.length}}">
+    暂无商品
+  </view>
+</view>
+<!-- <view wx:if="{{!goodsInfo.length && !loading}}" class="text-center text-muted py-3">
+  暂无商品
+</view> -->
+<van-popup show="{{ showPopup }}" custom-style="width:80%;border-radius:10px" bind:click-overlay="hidePopup">
+  <view class="p-3">
+    <view class="text-right" style="margin-top:-10px;margin-right:-10px">
+      <van-icon name="cross" color="#999" size="20px" bind:tap="hidePopup" />
+    </view>
+    <view class="h5 text-center mb-3 font-weight-bold">{{ sellerInfo.dnames }}</view>
+    <view class="mb-2">联系方式：{{ sellerInfo.mobile }}</view>
+    <view class="mb-2">联系人：{{ sellerInfo.contacts }}</view>
+    <view class="mb-2">地址：{{ sellerInfo.fullAddr }}</view>
+  </view>
+</van-popup>

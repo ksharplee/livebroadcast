@@ -1,0 +1,7 @@
+<!-- pages/loading/loading.wxml -->
+<view class="p-4 text-center text-muted small">
+  <view class="mb-3">
+    <van-loading color="#4cbaab" />
+  </view>
+  载入中...
+</view>

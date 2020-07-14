@@ -1,0 +1,6 @@
+/* pages/user/companyAlbum/companyAlbum.wxss */
+
+.van-uploader__upload,
+.van-uploader__preview {
+  margin: 0 15px 15px 0 !important;
+}

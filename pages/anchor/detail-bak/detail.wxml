@@ -1,0 +1,109 @@
+<!--pages/anchor/detail/detail.wxml-->
+<view
+  wx:if="{{edit}}"
+  class="footer large"
+>
+  <van-row>
+    <van-col span="12">
+      <van-button
+        type="primary"
+        square
+        block
+        size="large"
+        bind:click="onEditAnchor"
+      >编辑</van-button>
+    </van-col>
+    <van-col span="12">
+      <van-button
+        type="default"
+        square
+        block
+        size="large"
+        bind:click="onDeleteAnchor"
+      >删除</van-button>
+    </van-col>
+  </van-row>
+</view>
+<view
+  class="content"
+  style="padding-bottom:{{edit ? device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 50 : 0}}px"
+>
+  <view class="position-relative">
+    <view class="desc text-white">
+      <view class="d-flex justify-content-between align-items-center">
+        <text class="h6 font-weight-bold">{{anchor.nickName}}</text>
+        {{anchor.address ? anchor.address : ''}}
+      </view>
+    </view>
+    <van-image
+      src="{{anchor.logo}}?x-oss-process=image/resize,m_lfit,w_375,h_375"
+      width="{{device.windowWidth}}"
+      height="{{device.windowWidth}}"
+      use-loading-slot
+    >
+      <van-loading
+        slot="loading"
+        type="spinner"
+        size="20"
+        vertical
+      />
+    </van-image>
+    <!-- <swiper
+      indicator-dots="{{ true }}"
+      autoplay="{{ true }}"
+      duration="{{ 500 }}"
+      circular="{{ true }}"
+      indicator-color="#fff"
+      indicator-active-color="#4cbaab"
+      style="height:{{ device.screenWidth }}px;"
+    >
+      <swiper-item
+        wx:for="{{anchor.album}}"
+        wx:key="index"
+      >
+        <view class="swiper-item">
+          <van-image
+            src="{{item.image}}"
+            width="{{device.windowWidth}}"
+            height="{{device.windowWidth}}"
+            custom-class="d-block"
+            use-loading-slot
+            use-error-slot
+          >
+            <van-loading
+              slot="loading"
+              type="spinner"
+              size="20"
+              vertical
+            />
+            <text slot="error">加载失败</text>
+          </van-image>
+        </view>
+      </swiper-item>
+    </swiper>-->
+  </view>
+  <view class="p-3">
+    <view class="mb-1 font-weight-bold h5">{{anchor.fanCount}}</view>
+    <view class="mb-4">粉丝</view>
+    <view class="font-weight-bold mb-2">TA的平台</view>
+    <view class="d-flex">
+      <view
+        wx:for="{{anchor.platform}}"
+        wx:key="index"
+        class="rounded bg-primary text-white p-2 mr-2"
+        style="width:40%"
+      >
+        <!-- <van-image
+          src="{{anchor.pingtai === '快手' ? '/images/icon-kuaishou.png' : '/images/icon-douyin.png'}}"
+          width="40"
+          height="40"
+        />-->
+        <!-- <view class="media-body pl-2"> -->
+        <view class="mb-1 font-weight-bold">平台：{{item.platformName}}</view>
+        <view>粉丝数：{{item.fanCount}}</view>
+        <!-- </view> -->
+      </view>
+    </view>
+  </view>
+</view>
+<van-dialog id="van-dialog" />

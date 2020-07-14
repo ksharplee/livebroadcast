@@ -1,0 +1,80 @@
+/**index.wxss**/
+/* .userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+} */
+
+.menu-list {
+  position: absolute;
+  z-index: 101;
+  top: 45px;
+  right: 10px;
+}
+
+.menu-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 120px;
+  padding: 10px 15px;
+  color: #fff;
+  background-color: rgba(255, 128, 103, .9);
+  border-bottom: 1px solid #fff
+}
+
+.menu-backdrop {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.van-tabbar-item--active {
+  position: relative;
+  font-weight: bold;
+}
+
+.van-tabbar-item--active::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #4cbaab;
+}
+
+.van-hairline--top-bottom::after {
+  border-width: 0 0 1px 0 !important;
+}
+
+.toggle-menu {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  bottom: 20px;
+  padding: 8px 8px 8px 12px;
+  background-color: #4cbaab;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  color: #fff;
+}

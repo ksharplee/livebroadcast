@@ -1,0 +1,115 @@
+<!--pages/goodsDetail/goodsDetail.wxml-->
+<wxs src="../tools.wxs" module="tools" />
+<view class="footer">
+  <van-button type="primary" square block bind:click="returnPage">返回首页</van-button>
+</view>
+<view class="content" style="padding-bottom:{{device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 44}}px">
+  <view class="page-section page-section-spacing swiper position-relative">
+      <van-button type="default" open-type="share" custom-style="position:absolute;top:15px;right:15px;z-index:1;width:initial;height:initial;background-color:transparent;border:0;padding:0">
+      <view  class="text-white rounded-circle d-flex align-items-center justify-content-center" style="width:30px;height:30px;background-color:rgba(76, 186, 171, .75);"><van-icon name="share" size="20px" /></view>
+    </van-button>
+    <swiper indicator-dots="{{ true }}" autoplay="{{ true }}" duration="{{ 500 }}" circular="{{ true }}" indicator-color="#fff" indicator-active-color="#4cbaab" style="height:{{ device.screenWidth }}px;">
+      <block wx:if="{{ detail.images }}">
+        <swiper-item wx:for="{{detail.images}}" wx:key="*this">
+          <view class="swiper-item">
+            <view class="img-container full">
+              <view class="box rounded">
+                <image mode="aspectFill" src="{{ item.image }}?x-oss-process=image/resize,m_fill,w_600" class="w-100 h-100" mode="aspectFit" data-index="{{ index }}" ></image>
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+      <block wx:if="{{ !detail.images }}">
+        <swiper-item >
+          <view class="swiper-item">
+            <view class="img-container full">
+              <view class="box rounded">
+                <image mode="aspectFill" src="/images/imgWaiting.png" class="w-100 h-100" mode="aspectFit" ></image>
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <van-cell-group custom-class="mb-2">
+    <van-cell>
+      <view slot="title">
+        <view wx:if="{{ detail.containSpec == 1 }}" class="d-flex align-items-center">
+          <view class="text-pink">
+            ￥
+            <text class="h4">{{ detail.minPrice }}~{{ detail.maxPrice }}</text>
+          </view>
+          /{{ detail.unitName }}
+        </view>
+        <view wx:else class="d-flex align-items-center">
+          <view class="text-pink">
+            ￥
+            <text class="h4">{{ detail.price }}</text>
+          </view>
+          /{{ detail.unitName }}
+        </view>
+        <view class="py-2 font-weight-bold">{{ detail.dnames }}</view>
+         <view>
+        <!-- <van-button bindtap="wxpay">{{ showOp }}</van-button> -->
+      </view>
+      </view>
+    </van-cell>
+    <van-cell title="编码：" title-class="flex-grow-0 text-nowrap text-muted" value="{{ detail.dno }}" value-class="text-dark text-left"/>
+    <van-cell title="起订量：" title-class="flex-grow-0 text-nowrap text-muted" value="{{ detail.moq }}{{ detail.unitName }}" value-class="text-dark text-left"/>
+    <!-- <van-cell title="{{ detail.sellerName }}" title-class="flex-grow-0 text-nowrap font-weight-bold" center>
+      <van-button type="primary" round size="small" bind:click="jumpToPage">进店逛逛 ></van-button>
+    </van-cell> -->
+  </van-cell-group>
+  <van-cell-group custom-class="mb-2">
+    <van-cell bind:click="showSpec">
+      <view slot="title" class="font-weight-bold">规格</view>
+      {{ detail.detail.length }}个规格可选
+      <view slot="right-icon" class="pl-3">
+        <van-icon name="weapp-nav" color="#4cbaab" />
+      </view>
+    </van-cell>
+  </van-cell-group>
+  <van-cell-group wx:if="{{ detail.attr }}" custom-class="mb-2">
+    <van-cell>
+      <view slot="title" class="font-weight-bold">商品属性</view>
+    </van-cell>
+    <van-cell wx:for="{{ detail.attr }}" wx:key="id" title="{{ item.attrName }}" title-class="text-muted" value="{{ item.attrValue }}" value-class="text-dark" />
+  </van-cell-group>
+  <van-cell-group wx:if="{{detail.detailDesc != ''}}" custom-class="mb-2">
+    <van-cell>
+      <view slot="title" class="font-weight-bold">商品详情</view>
+    </van-cell>
+    <van-cell value-class="text-left text-dark">
+      <rich-text nodes="{{detail.detailDesc}}"></rich-text>
+    </van-cell>
+  </van-cell-group>
+</view>
+<van-popup position="bottom" show="{{ showSpec }}" custom-style="overflow-y:initial;height:75%;" closeable bind:close="onClose">
+  <view style="top:0;right:0;bottom:0;left:0" class="position-absolute">
+    <view class="media px-3" style="margin-bottom: -10px">
+      <view class="img-container" style="top:-20px">
+        <view class="box rounded">
+          <image mode="aspectFill" class="w-100 h-100" src="{{detail.images ? detail.images[0].image + '?x-oss-process=image/resize,m_fill,w_300' : '/images/imgWaiting.png'}}"></image>
+        </view>
+      </view>
+      <view class="media-body px-3 pt-3">
+        <view class="mb-1  line-break">{{ detail.dnames }}</view>
+      </view>
+
+    </view>
+    <scroll-view scroll-y="true" class="border-top" style="height: {{ device.windowHeight * 0.75 - 114 - 15 - 44}}px;margin-bottom:15px">
+      <van-cell wx:for="{{ detail.detail }}" use-label-slot wx:key="id" custom-class="pt-1 pb-2" value-class="d-flex align-items-end justify-content-end">
+        <view slot="title">
+          {{ item.detailName ? item.detailName : '无规格'}}
+          <text class="text-muted">{{ item.barCode }}</text>
+        </view>
+        <view slot="label" class="text-pink h5 d-flex align-items-baseline">
+          <view class="small">￥</view>{{ item.price ? tools.toFixed(item.price * 1) : '暂无' }} /
+          <view class="small">{{detail.unitName }}</view>
+        </view>
+      </van-cell>
+    </scroll-view>
+  </view>
+</van-popup>

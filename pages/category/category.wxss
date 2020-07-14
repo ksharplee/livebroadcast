@@ -1,0 +1,25 @@
+/* pages/category/category.wxss */
+
+page {
+  background-color: #ebebeb;
+  --sidebar-selected-background-color: #ebebeb;
+  --sidebar-background-color: #fff;
+  --tree-select-content-background-color: #ebebeb;
+  --tree-select-nav-background-color: #ebebeb;
+  --sidebar-selected-border-color: #4cbaab;
+  /* --sidebar-padding: 20px 8px 20px 4px; */
+}
+
+.van-sidebar {
+  background-color: #fff;
+  text-align: center;
+}
+
+.van-tree-select__content {
+  flex: 3 !important;
+  -webkit-flex: 3 !important;
+}
+
+.van-sidebar-item {
+  padding: 20px 8px 20px 4px !important;
+}

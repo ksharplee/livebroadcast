@@ -1,0 +1,5 @@
+/* pages/user/anchorPlatform/anchorPlatform.wxss */
+
+page {
+  background-color: #f5f5f5;
+}

@@ -1,0 +1,111 @@
+<!--pages/anchor/company/company.wxml-->
+<view
+  class="user-header-bg position-relative"
+  style="z-index:-1"
+>
+  <image
+    src="/images/img-user-header-bg.jpg"
+    class="shadow"
+    style="width:{{device.windowWidth}}px;height:{{device.windowWidth*0.45}}px"
+  />
+  <view class="content-area flex-column justify-content-center text-center text-white">
+    <view class="img-container small mx-auto mb-2">
+      <view class="box rounded-circle">
+        <image src="/images/img-zhubo.png" />
+      </view>
+    </view>
+    <view class="mb-2 h4">曹德</view>
+  </view>
+</view>
+<view
+  class="rounded overflow-hidden mx-3 bg-white mb-3"
+  style="margin-top:-40px"
+>
+  <van-cell
+    is-link
+    url="/pages/anchor/album/album"
+    title="相册"
+  />
+  <navigator
+    url
+    class="p-3 d-flex align-items-center"
+  >
+    <view style="flex-grow: 1">
+      <van-row gutter="10">
+        <van-col
+          wx:for="{{4}}"
+          span="6"
+        >
+          <view class="img-container full rounded overflow-hidden">
+            <view class="box">
+              <image src="/images/img-company.jpg" />
+            </view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+    <view class="h-100 d-flex align-items-center justify-content-center px-2">
+      <van-icon
+        name="ellipsis"
+        size="20px"
+        color="#666"
+      />
+    </view>
+  </navigator>
+</view>
+<view class="mb-2 mx-3 text-center">
+  <van-row
+    gutter="10"
+    custom-class="pb-2"
+  >
+    <van-col span="12">直播平台</van-col>
+    <van-col span="12">粉丝数量</van-col>
+  </van-row>
+  <view class="bg-white rounded overflow-hidden text-muted">
+    <van-row
+      gutter="10"
+      custom-class="border-bottom"
+    >
+      <van-col
+        span="12"
+        custom-class="py-2"
+      >抖音</van-col>
+      <van-col
+        span="12"
+        custom-class="border-left  py-2"
+      >120000</van-col>
+    </van-row>
+    <van-row
+      gutter="10"
+      custom-class="border-bottom"
+    >
+      <van-col
+        span="12"
+        custom-class="py-2"
+      >抖音</van-col>
+      <van-col
+        span="12"
+        custom-class="border-left py-2"
+      >120000</van-col>
+    </van-row>
+  </view>
+</view>
+<view class="m-3 rounded overflow-hidden">
+  <van-cell-group custom-class="mb-2">
+    <van-cell
+      title="直播的产品类目"
+      value="饰品,日用品"
+    />
+    <van-cell
+      url="/pages/user/anchorProduct/anchorProduct?hidden=1"
+      title="直播过的产品"
+      is-link
+    />
+  </van-cell-group>
+  <van-cell-group custom-class="mb-2">
+    <van-cell title="个人简介" />
+    <view class="p-3 bg-white">
+      <rich-text nodes="{{nodes}}"></rich-text>
+    </view>
+  </van-cell-group>
+</view>

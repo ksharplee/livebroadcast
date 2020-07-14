@@ -1,0 +1,78 @@
+{
+  "pages": [
+    "pages/loading/loading",
+    "pages/index/index",
+    "pages/anchor/list/list",
+    "pages/anchor/company/company",
+    "pages/anchor/album/album",
+    "pages/anchor/companyZhuboDesc/companyZhuboDesc",
+    "pages/anchor/companyZhubo/companyZhubo",
+    "pages/anchor/index/index",
+    "pages/anchor/detail/detail",
+    "pages/user/index/index",
+    "pages/user/companyInfo/companyInfo",
+    "pages/user/userInfo/userInfo",
+    "pages/user/companyDesc/companyDesc",
+    "pages/user/anchor/anchor",
+    "pages/user/anchorAdd/anchorAdd",
+    "pages/user/anchorDesc/anchorDesc",
+    "pages/user/anchorProCate/anchorProCate",
+    "pages/user/anchorProduct/anchorProduct",
+    "pages/user/anchorProductAdd/anchorProductAdd",
+    "pages/sellerGoods/sellerGoods",
+    "pages/goodsDetail/goodsDetail",
+    "pages/broadCast/broadCast"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "商城直播货源",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "img-uploader": "/components/uploader/uploader"
+  },
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": [
+    "wx5efdf9a130d894ad"
+  ],
+  "tabBar": {
+    "custom": false,
+    "color": "#999faa",
+    "selectedColor": "#55b5c1",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icon-tabbar-bag.png",
+        "selectedIconPath": "images/icon-tabbar-bag-active.png",
+        "text": "直播商品"
+      },
+      {
+        "pagePath": "pages/anchor/index/index",
+        "iconPath": "images/icon-tabbar-wanghong.png",
+        "selectedIconPath": "images/icon-tabbar-wanghong-active.png",
+        "text": "推荐网红"
+      }
+    ]
+  }
+}

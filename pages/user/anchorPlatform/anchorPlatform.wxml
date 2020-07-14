@@ -1,0 +1,77 @@
+<!--pages/user/anchorPlatform/anchorPlatform.wxml-->
+<!--pages/user/anchorAdd/anchorAdd.wxml-->
+<view class="footer large">
+  <van-button
+    type="primary"
+    square
+    block
+    size="large"
+    loading="{{submitting}}"
+    bind:click="onSubmit"
+  >保存</van-button>
+</view>
+<view
+  class="content"
+  style="padding-bottom:{{device.needFix ? device.safeArea.bottom -  device.safeArea.height + 40 : 50}}px"
+>
+  <van-row
+    gutter="20"
+    custom-class="px-3 py-2"
+  >
+    <van-col span="10">直播平台</van-col>
+    <van-col span="10">粉丝数量</van-col>
+  </van-row>
+  <van-row
+    wx:for="{{platform}}"
+    wx:key="index"
+    gutter="20"
+    custom-class="px-3 py-2 bg-white border-bottom"
+  >
+    <van-col span="10">
+      <input
+        value="{{item.platformName}}"
+        placeholder="请输入直播平台的名称"
+        data-index="{{index}}"
+        bind:input="changePlatformName"
+      />
+    </van-col>
+    <van-col
+      span="10"
+      custom-class="border-left"
+    >
+      <input
+        value="{{item.fanCount}}"
+        placeholder="请输入平台的粉丝数量"
+        data-index="{{index}}"
+        bind:input="changePlatformFan"
+      />
+    </van-col>
+    <van-col
+      span="4"
+      custom-class="text-center"
+    >
+      <van-icon
+        name="clear"
+        size="20px"
+        color="{{platform.length > 1 ? '#999' : '#ccc'}}"
+        data-index="{{index}}"
+        bind:click="removePlatform"
+      />
+    </van-col>
+  </van-row>
+  <van-button
+    plain
+    custom-class="text-primary bg-transparent border-0"
+    disabled="{{!platform[platform.length - 1].platformName || !platform[platform.length - 1].fanCount}}"
+    bind:click="addPlatform"
+  >
+    <view class="d-flex align-items-center">
+      增加一行
+      <van-icon
+        name="plus"
+        size="14px"
+        color="#4cbaab"
+      />
+    </view>
+  </van-button>
+</view>

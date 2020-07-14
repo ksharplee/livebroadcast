@@ -1,0 +1,13 @@
+<!--pages/anchor/album/album.wxml-->
+<view class="content p-3">
+  <van-row gutter="15">
+    <van-col wx:for="{{album}}" wx:key="index" span="6" custom-class="mb-4">
+      <view class="img-container full" data-index="{{index}}" bind:tap="previewImage">
+        <view class="box rounded-lg bg-white">
+          <image src="{{item.image}}?x-oss-process=image/resize,m_lfit,w_375,h_375" />
+        </view>
+      </view>
+    </van-col>
+  </van-row>
+</view>
+<!-- <mp-gallery hide-on-click="{{true}}"  showDelete="{{false}}" show="{{showPreview}}" img-urls="{{previewImageUrls}}" current="{{previewCurrent}}"></mp-gallery> -->

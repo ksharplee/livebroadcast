@@ -1,0 +1,58 @@
+<!--pages/category/category.wxml-->
+<van-tree-select
+  items="{{ category }}"
+  active-id="{{ activeId }}"
+  main-active-index="{{ cateIndex }}"
+  main-active-class="font-weight-bold"
+  custom-style="height:500px"
+  bind:click-nav="onClickNav"
+>
+  <view
+    slot="content"
+    style="padding:15px"
+  >
+    <scroll-view
+      style="height:{{device.needFix ? device.screenHeight - 120 : device.windowHeight}}px"
+    >
+      <view class="mb-2 font-weight-bold">{{category[cateIndex].text}}</view>
+      <view class="bg-white rounded-lg">
+        <van-grid
+          wx:if="{{category[cateIndex].child && category[cateIndex].child.length}}"
+          column-num="3"
+          custom-class="text-center"
+          clickable
+          gutter="{{10}}"
+          border="{{ false }}"
+        >
+          <van-grid-item
+            use-slot
+            wx:for="{{ category[cateIndex].child }}"
+            wx:key="index"
+            data-id="{{item.id}}"
+            data-index="{{index}}"
+            bind:click="getGoodsBySubCate"
+          >
+            <van-image
+              src="{{item.image}}"
+              width="{{(device.screenWidth * 0.75 - 96) / 3}}px"
+              height="{{(device.screenWidth * 0.75 - 96) / 3}}px"
+              use-loading-slot
+            >
+              <van-loading
+                slot="loading"
+                type="spinner"
+                size="20"
+                vertical
+              />
+            </van-image>
+            <view class="text-truncate py-2">{{item.dnames}}</view>
+          </van-grid-item>
+        </van-grid>
+        <view
+          wx:else
+          class="text-center text-muted p-3"
+        >暂无分类</view>
+      </view>
+    </scroll-view>
+  </view>
+</van-tree-select>

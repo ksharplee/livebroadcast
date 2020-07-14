@@ -1,0 +1,344 @@
+<!-- index.wxml -->
+<van-sticky>
+  <view class="bg-white px-2 pt-2">
+    <!-- <view
+      class="rounded-pill pl-2 pr-2 text-white align-self-center position-relative small bg-primary"
+      style="height:30px"
+    >
+      <view
+        hover-class="hover-class"
+        class="d-flex h-100 text-nowrap align-items-center"
+      >
+        <van-icon
+          name="arrow-left"
+          size="12px"
+        />
+        <view
+          style="margin-left:2px"
+          bindtap="jumpToPage"
+        >义数订货</view>
+      </view>
+    </view>-->
+    <view class="px-2 mb-2">
+      <van-search
+        value="{{ searchStr }}"
+        input-class="pl-1"
+        placeholder="请输入商品关键字"
+        shape="round"
+        background="transparent"
+        custom-class="p-0"
+        bind:change="onChange"
+        bind:search="onSearch"
+        bind:cancel="onCancel"
+        bind:clear="getGoodsInfo"
+        clearable
+      ></van-search>
+    </view>
+    <!-- <view
+      class="rounded-pill pl-2 pr-1 text-white position-relative small pr-1"
+      style="background-color:#ff8067;height:30px"
+    >
+      <view
+        hover-class="hover-class"
+        class="d-flex h-100 text-nowrap align-items-center"
+        bind:tap="navitageTo"
+      >
+        <view style="margin-right:3px">直播公司</view>
+        <van-icon name="arrow" size="12px" />
+      </view>
+    </view>-->
+    <view
+      class="d-flex position-relative align-items-center pb-2"
+    >
+      <scroll-view
+        scroll-x="true"
+        style="width: {{device.windowWidth - 68}}px;"
+        class="pl-2"
+      >
+        <div class="d-flex text-nowrap align-items-center" style="font-size:16px">
+          <view
+            class="pr-3 {{cateIndex === 0 ? 'text-primary font-weight-bold' : ''}}"
+            data-id="0"
+            data-index="{{-1}}"
+            bind:tap="getGoodsByCate"
+          >全部</view>
+          <view
+            wx:for="{{categories}}"
+            wx:key="index"
+            class="px-3 {{cateIndex === index + 1 ? 'text-primary font-weight-bold' : ''}}"
+            data-index="{{index}}"
+            data-id="{{item.id}}"
+            bind:tap="getGoodsByCate"
+          >{{item.dnames}}</view>
+        </div>
+      </scroll-view>
+      <image
+        src="/images/bg-shadow.png"
+        style="width:8px;height:34px;margin-left:-6px"
+      />
+      <navigator
+        url="/pages/category/category"
+        class="bg-white d-flex align-items-center justify-content-center pr-1 pl-1"
+        style="width:34px;height:34px;"
+      >
+        <van-icon
+          name="wap-nav"
+          size="22px"
+        />
+      </navigator>
+    </view>
+  </view>
+  </van-sticky>
+  <view
+    wx:if="{{subCategories.length}}"
+  >
+    <van-grid
+      column-num="5"
+      custom-class="w-100 border-bottom text-center"
+      clickable
+      border="{{ false }}"
+    >
+      <van-grid-item
+        use-slot
+        wx:for="{{ subCategories }}"
+        wx:key="index"
+        data-index="{{index}}"
+        data-id="{{item.id}}"
+        bind:click="getGoodsBySubCate"
+      >
+        <van-image
+          src="{{item.image}}?x-oss-process=image/resize,m_lfit,w_200,h_200"
+          width="{{(device.screenWidth - 72) / 5}}px"
+          height="{{(device.screenWidth - 72) / 5}}px"
+          use-loading-slot
+        >
+          <van-loading
+            slot="loading"
+            type="spinner"
+            size="20"
+            vertical
+          />
+        </van-image>
+        <view class="py-2 text-truncate {{subCateIndex === index ? 'font-weight-bold' : ''}}" style="color:{{subCateIndex === index ? '#4cbaab' : '#666'}}">{{item.dnames}}</view>
+      </van-grid-item>
+      <van-grid-item use-slot bind:click="navigateToCategory">
+        <view style="height:{{(device.screenWidth - 72) / 5}}px" class="d-flex align-items-center justify-content-center mb-1"><van-icon name="more" size="30px" color="#e8e8e8" /></view>
+        <view class="py-2 text-truncate" style="color:#666">查看更多</view>
+      </van-grid-item>
+    </van-grid>
+  </view>
+  <view wx:else class="bg-white px-2">
+    <view class="page-section page-section-spacing swiper position-relative px-2">
+      <swiper
+        indicator-dots="{{ true }}"
+        autoplay="{{ true }}"
+        duration="{{ 500 }}"
+        circular="{{ true }}"
+        indicator-color="#fff"
+        indicator-active-color="#4cbaab"
+        style="height:{{ (device.screenWidth - 32) * 0.31  }}px;"
+      >
+        <swiper-item wx:for="{{companyBanner}}" wx:key="index">
+          <navigator
+            class="swiper-item"
+            url="{{item.link}}"
+          >
+            <!-- bind:tap="switchToCompany" -->
+            <van-image
+              src="{{item.image}}"
+              width="{{device.screenWidth - 32}}px"
+              height="{{(device.screenWidth - 32) * 0.31}}px"
+              use-loading-slot
+            >
+              <van-loading
+                slot="loading"
+                type="spinner"
+                size="20"
+                vertical
+              />
+            </van-image>
+          </navigator>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+  <view class="sort-bar pa-2 position-relative">
+    <van-tabbar
+      active="{{ active }}"
+      fixed="{{ false }}"
+      active-color="#4cbaab"
+      inactive-color="#333"
+      bind:change="onChangeTab"
+    >
+      <van-tabbar-item>全部</van-tabbar-item>
+      <van-tabbar-item
+        data-index="1"
+        bind:tap="onChangeTabbar"
+      >
+        价格
+        <van-icon
+          name="{{ active === 1 ? sortPrice ? '/images/icon-caret-down-active.png' : '/images/icon-caret-up-active.png' :  '/images/icon-caret-down.png'}}"
+          size="10px"
+        />
+      </van-tabbar-item>
+      <van-tabbar-item
+        data-index="2"
+        bind:tap="onChangeTabbar"
+      >
+        上架时间
+        <van-icon
+          name="{{ active === 2 ? sortStock ? '/images/icon-caret-down-active.png' : '/images/icon-caret-up-active.png' :  '/images/icon-caret-down.png'}}"
+          size="10px"
+        />
+      </van-tabbar-item>
+      <van-tabbar-item custom-class="px-3 d-flex flex-row justify-content-between">
+        <van-icon
+          name="{{ display ? 'apps-o' : 'bars' }}"
+          size="24px"
+          color="#4cbaab"
+          bind:click="toggleDisplay"
+        />
+      </van-tabbar-item>
+    </van-tabbar>
+  </view>
+<view class="content">
+  <block wx:if="{{ display }}">
+    <view
+      class="media border-bottom p-3 position-relative"
+      wx:for="{{ goodsInfo.item }}"
+      wx:key="id"
+    >
+      <navigator
+        url="/pages/goodsDetail/goodsDetail?sellerId={{ item.sellerId }}&goodsId={{ item.goodId }}"
+        class="img-container"
+      >
+        <view class="box rounded">
+          <image
+            mode="aspectFill"
+            style="width:100%;height:100%"
+            src="{{ item.image ? item.image + '?x-oss-process=image/resize,m_lfit,w_375,h_375' : '/images/imgWaiting.png' }}"
+          />
+        </view>
+      </navigator>
+      <view class="media-body pl-3 align-self-stretch d-flex flex-column">
+        <navigator
+          url="/pages/goodsDetail/goodsDetail?sellerId={{ item.sellerId }}&goodsId={{ item.goodId }}"
+        >
+          <view class="line-break h6 mb-1">{{ item.goodName }}</view>
+          <view
+            class="text-muted mb-2"
+          >库存：{{ item.stock > 0 ? item.stock : '有货'}}{{item.stock > 0 ? item.unitName :'' }}</view>
+          <view class="text-pink h4 font-weight-bold mb-2">￥{{ item.containSpec === '1' ? item.minPrice : item.price }}</view>
+        </navigator>
+        <!-- <navigator
+          class="mt-auto d-flex align-items-center"
+          hover-class="hover-class"
+          url="/pages/sellerGoods/sellerGoods?sellerId={{ item.sellerId }}"
+        >
+          <van-icon
+            name="shop-o"
+            custom-style="margin-right:5px;color:#666"
+          />
+          <view class="text-truncate">{{ item.sellerName }}</view>
+        </navigator> -->
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="pt-2 px-2" style="padding-left:5px;padding-right:5px">
+      <van-row
+      >
+        <van-col
+          span="12"
+          wx:for="{{goodsInfo.item}}"
+          wx:key="id"
+        >
+          <view class="card px-1">
+            <navigator
+              class="img-container full"
+              url="/pages/goodsDetail/goodsDetail?sellerId={{ item.sellerId }}&goodsId={{ item.goodId }}"
+            >
+              <view class="box rounded-top">
+                <image
+                  mode="aspectFill"
+                  src="{{ item.image ? item.image + '?x-oss-process=image/resize,m_lfit,w_375,h_375' : '/images/imgWaiting.png' }}"
+                />
+              </view>
+            </navigator>
+            <view class="card-body bg-product-box position-relative pt-2 pb-3 px-2">
+              <navigator
+                url="/pages/goodsDetail/goodsDetail?sellerId={{ item.sellerId }}&goodsId={{ item.goodId }}"
+              >
+                <view class="text-truncate mb-1 h6">{{ item.goodName }}</view>
+                <view
+                  class="text-muted mb-2"
+                >库存：{{ item.stock > 0 ? item.stock : '有货' }}{{item.stock > 0 ? item.unitName :'' }}</view>
+                <view class="text-pink h4 font-weight-bold">￥{{ item.containSpec === '1' ? item.minPrice : item.price }}</view>
+              </navigator>
+              <!-- <navigator
+                class="text-truncate d-flex align-items-center"
+                hover-class="hover-class"
+                url="/pages/sellerGoods/sellerGoods?sellerId={{ item.sellerId }}"
+              >
+                <van-icon
+                  name="shop-o"
+                  custom-style="margin-right:5px;color:#666"
+                />
+                <view class="text-truncate">{{ item.sellerName }}</view>
+              </navigator> -->
+            </view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </block>
+  <view
+    class="text-center text-muted pt-3"
+    wx:if="{{!loading && !goodsInfo.item.length}}"
+  >暂无商品</view>
+</view>
+<!-- <van-button type="primary" size="small" round custom-style="position:fixed;bottom:20px;right:20px" bind:click="switchTab">
+  <view class="d-flex align-items-center">
+    <van-icon name="tv-o" size="18px" color="#fff"></van-icon>
+        <view class="mx-1">直播入驻</view>
+                <van-icon name="arrow" size="14px" color="#fff"></van-icon>
+  </view>
+</van-button>-->
+<!-- <view wx:if="{{!goodsInfo.length && !loading}}" class="text-center text-muted py-3">
+  暂无商品
+</view>-->
+<view
+  hidden="{{!menu}}"
+  class="menu-list"
+>
+  <navigator
+    url="/pages/broadCast/broadCast?name=yinyi"
+    class="menu-list-item"
+  >
+    银奕传媒
+    <van-icon
+      name="arrow"
+      color="#fff"
+    />
+  </navigator>
+  <navigator
+    url="/pages/broadCast/broadCast?name=tuolingsheng"
+    class="menu-list-item"
+  >
+    驼铃声
+    <van-icon
+      name="arrow"
+      color="#fff"
+    />
+  </navigator>
+</view>
+<view
+  hidden="{{!menu}}"
+  class="menu-backdrop"
+  bind:tap="hideMenu"
+  catch:touchmove="noop"
+></view>
+<view bind:tap="toggleMenu" class="toggle-menu d-flex align-items-center">
+  <van-icon wx:if="{{!toggleMenu}}" name="arrow-left" size="16px" color="#fff" />供<text wx:if="{{toggleMenu}}">应商管理</text>
+  <van-icon wx:if="{{toggleMenu}}" name="arrow" size="16px" color="#fff" />
+</view>

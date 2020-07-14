@@ -1,0 +1,36 @@
+<!--pages/user/anchorProduct/anchorProduct.wxml-->
+<!-- wx:if="{{showBtn}}" -->
+<view
+  class="content"
+>
+  <view wx:if="{{goods.length}}" style="padding:15px">
+    <van-row gutter="10">
+      <van-col
+        wx:for="{{goods}}"
+        wx:key="index"
+        span="12"
+        custom-class="mb-3"
+      >
+        <view class="bg-white rounded overflow-hidden">
+          <van-image
+            src="{{item.goodImage}}"
+            width="{{imgWidth}}"
+            height="{{imgWidth}}"
+            use-loading-slot
+          >
+            <van-loading
+              slot="loading"
+              type="spinner"
+              size="20"
+              vertical
+            />
+          </van-image>
+          <view class="p-2">
+            <view class="text-truncate">{{item.goodName}}</view>
+          </view>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+  <view wx:else class="text-muted text-center py-3">暂无</view>
+</view>

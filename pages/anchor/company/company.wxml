@@ -1,0 +1,114 @@
+<!--pages/anchor/company/company.wxml-->
+<view
+  class="user-header-bg position-relative"
+  style="z-index:-1"
+>
+  <image
+    src="/images/img-user-header-bg.jpg"
+    class="shadow"
+    style="width:{{device.windowWidth}}px;height:{{device.windowWidth*0.45}}px"
+  />
+  <view class="content-area flex-column justify-content-center text-center text-white">
+    <view class="img-container small mx-auto mb-2">
+      <view class="box rounded-circle">
+        <image src="{{company.album[0].image}}" />
+      </view>
+    </view>
+    <view class="mb-2 h4">{{company.baseInfo.companyName}}</view>
+  </view>
+</view>
+<view
+  class="rounded overflow-hidden mx-3 bg-white mb-3"
+  style="margin-top:-40px"
+>
+  <van-cell
+    is-link
+    url="/pages/anchor/album/album"
+    title="公司相册"
+  />
+  <navigator
+    url
+    class="p-3"
+  >
+    <!-- <view style="flex-grow: 1"> -->
+    <van-row gutter="10">
+      <van-col
+        wx:for="{{albumToShow}}"
+        wx:key="index"
+        span="6"
+      >
+        <view class="img-container full rounded overflow-hidden">
+          <view class="box">
+            <image src="{{item.image}}?x-oss-process=image/resize,m_lfit,w_375,h_375" />
+          </view>
+        </view>
+      </van-col>
+    </van-row>
+    <!-- </view> -->
+    <!-- <view class="h-100 d-flex align-items-center justify-content-center px-2">
+      <van-icon
+        name="ellipsis"
+        size="20px"
+        color="#666"
+      />
+    </view>-->
+  </navigator>
+</view>
+<view class="rounded mx-3 overflow-hidden bg-white mb-3">
+  <van-cell
+    url="/pages/anchor/companyZhubo/companyZhubo?id={{company.id}}&&sellerId={{company.sellerId}}"
+    title="旗下主播"
+    is-link
+  />
+  <view
+    wx:if="{{anchorsAvailable.length}}"
+    class="p-3 text-center"
+  >
+    <van-row gutter="10">
+      <van-col
+        wx:for="{{anchorsAvailable}}"
+        wx:key="index"
+        span="4"
+      >
+        <navigator
+          url="/pages/anchor/detail/detail?id={{item.id}}&&sellerId={{item.sellerId}}"
+        >
+          <van-image
+            src="{{item.logo}}?x-oss-process=image/resize,m_lfit,w_120,h_120"
+            custom-class="rounded-circle overflow-hidden"
+            width="{{imgWidth}}px"
+            height="{{imgWidth}}px"
+            use-loading-slot
+          >
+            <van-loading
+              slot="loading"
+              type="spinner"
+              size="20"
+              vertical
+            />
+          </van-image>
+          <!-- <view class="img-container full mb-2 rounded-circle overflow-hidden">
+          <view class="box">
+            <image src="{{item.logo}}?x-oss-process=image/resize,m_lfit,w_375,h_375" />
+          </view>
+          </view>-->
+          <!-- <view class="mb-1">{{item.nickName}}</view>
+          <view class="text-primary text-truncate small">粉丝: {{item.fanCount}}</view>-->
+        </navigator>
+      </van-col>
+    </van-row>
+  </view>
+  <view
+    wx:if="{{!anchorsAvailable.length && !loading}}"
+    class="text-muted text-center py-2"
+  >暂无主播</view>
+</view>
+<view class="m-3 rounded overflow-hidden">
+  <van-cell-group>
+    <van-cell title="公司简介" />
+    <view class="p-3 bg-white text-muted">
+      <!-- <rich-text nodes="{{nodes}}"></rich-text> -->
+      {{company.baseInfo.desce}}
+    </view>
+  </van-cell-group>
+</view>

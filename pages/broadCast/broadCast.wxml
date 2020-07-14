@@ -1,0 +1,82 @@
+<!--pages/broadCast/broadCast.wxml-->
+<view class="content">
+  <block wx:if="{{yinyi}}">
+    <view class="img-container my-3 mx-auto" style="width:50%;padding-bottom:13%">
+      <view class="box"><image src="/images/logo-yinyi.jpg" class="w-100 h-100" /></view>
+    </view>
+    <view class="px-3">
+      <view class="mb-4 text-indent">
+              义乌银奕传媒有限公司成立于2017年。是一家综合性企业。为各大企业、MCN机构、团队及个人提供主播孵化、主播输出，带货直播、短视频账号孵化、产品集成供应、直播后期服务等。
+      </view>
+      <view class="mb-4 text-indent">
+            公司业务板块分带货直播、主播孵化、账号孵化、账号运营四大板块。
+      </view>
+      <view class="mb-4">
+        <view class="mb-1 font-weight-bold">带货直播：</view>
+        <view >公司依托现有的直播团队，为企业提供产品输出变现服务;</view>
+      </view>
+      <view class="mb-4">
+        <view class="mb-1 font-weight-bold">主播孵化：</view>
+        <view >我们有完善的孵化体系，为企业或个体提供孵化，打造您的专属主播;</view>
+      </view>
+      <view class="mb-4">
+        <view class="mb-1 font-weight-bold">账号孵化：</view>
+        <view >为企业和个体提供专属账号孵化服务，为您打造您的产品专属出口；</view>
+      </view>
+      <view class="mb-4">
+        <view class="mb-1 font-weight-bold">账号运营：</view>
+        <view >基地现有的服务架构，为您提供账号的前后期运营变现服务，为您解决运营能力、运营团队、运营成本不足等诸多问题；</view>
+      </view>
+      <view class="mb-4 text-indent">企业或个人账号全案输出服务,为您打造一个专属账号、专属主播。人号同步孵化；从账号策划、主播定位、内容设定、内容输出、产品呈现、产品转化、整体运营提供一站式服务。</view>
+      <view class="mb-4">
+        <view class="img-container full" style="padding-bottom:75%"><view class="box"><image src="/images/img-des-yinyi.jpg" class="w-100 h-100" /></view></view>
+      </view>
+      <view class="mb-1">
+        <view class="img-container mx-auto">
+          <view class="box">
+            <image class="w-100 h-100" src="https://baseversion.oss-cn-hangzhou.aliyuncs.com/other/normal/erweima.jpg" data-src="https://baseversion.oss-cn-hangzhou.aliyuncs.com/other/normal/erweima.jpg" bind:tap="previewImage" />
+          </view>
+        </view>
+      </view>
+      <view class="text-muted mb-4 text-center">
+                微信咨询
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{tuolingsheng}}">
+    <view class="img-container my-3 mx-auto" style="width:50%;padding-bottom:19%">
+      <view class="box"><image src="/images/logo-tuolingsheng.jpg" class="w-100 h-100" /></view>
+    </view>
+    <view class="px-3">
+      <view class="mb-4 text-indent">
+                            盛京（义乌）商业管理有限公司为快手服饰产业带义乌服务商。为助力义乌国际商贸城全面复市，疫情期间安全“买买买”，快手服饰产业带义乌盛京直播基地为商家老铁保驾护航，全面助力商家老铁成长，打赢快手电商战疫。
+      </view>
+      <view class="mb-4">
+        <view class="mb-1 font-weight-bold">商家技术服务费减免</view>
+        <view >减免后，仅承担1%支付渠道手续费</view>
+      </view>
+      <view class="mb-4">
+        <view class="mb-1 font-weight-bold">专属流量扶持</view>
+        <view >快手服饰产业带义乌商城直播基地的商家，基地将给予作品流量普投与追投、流量券扶持,并可获得官方助推。</view>
+      </view>
+      <view class="mb-4">
+        <view class="mb-1 font-weight-bold">专享扶持线下门店商家</view>
+        <view >回款账期缩短：对满足条件的商户，将定向邀请开放账期缩短功能，开启后，结算周期缩短至发货后7天（未发生消费纠纷），帮助商家快速回笼货款，缓解现金流压力；</view>
+      </view>
+      <view class="mb-4">
+        <view class="mb-1 font-weight-bold">手把手运营指导</view>
+        <view >快手服饰产业带义乌盛京直播基地将根据企业实际情况，提供专业的定制化支持。</view>
+      </view>
+      <view class="mb-1">
+        <view class="img-container mx-auto">
+          <view class="box">
+            <image class="w-100 h-100" src="https://baseversion.oss-cn-hangzhou.aliyuncs.com/other/normal/erweima2.jpg" data-src="https://baseversion.oss-cn-hangzhou.aliyuncs.com/other/normal/erweima2.jpg"  bind:tap="previewImage" />
+          </view>
+        </view>
+      </view>
+      <view class="text-muted mb-4 text-center">
+                微信咨询
+      </view>
+    </view>
+  </block>
+</view>
